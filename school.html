@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paski - interaktywne przesuwanie</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: black;
+      flex-direction: column;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+    .menu {
+      text-align: center;
+      position: absolute;
+      top: 30%;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .kontener {
+      display: none;
+      width: 100%;
+      height: 90vh; /* Zostawiamy 10% miejsca na przycisk */
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .zestaw {
+      display: flex;
+      gap: 10px;
+      width: 15%;
+      height: 80vh;
+      justify-content: center;
+      position: absolute;
+      cursor: grab;
+    }
+    .pasek {
+      flex: 1;
+      background: linear-gradient(to bottom, #00f, #008);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .pasek:hover {
+      transform: scaleX(1.05);
+    }
+    /* Niewidzialny przycisk - tylko na dole */
+    .niewidzialny-przycisk {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 10vh;
+      background: transparent;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- MENU WYBORU LICZBY ZESTAWÓW -->
+<div class="menu" id="menu">
+  <h1>Wybierz liczbę zestawów pasków</h1>
+  <select id="liczbaZestawow">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+  <button onclick="start()">Rozpocznij</button>
+</div>
+
+<!-- KONTAINER NA PASKI -->
+<div class="kontener" id="kontener"></div>
+
+<!-- NIEWIDZIALNY PRZYCISK PRZEJŚCIA DO DŹWIĘKÓW -->
+<div class="niewidzialny-przycisk" onclick="przejdzDoDzwiekow()"></div>
+
+<!-- DŹWIĘK PO ZNIKNIĘCIU WSZYSTKICH PASKÓW -->
+<audio id="koncowyDzwiek" src="/sounds/koncowy-dzwiek.mp3"></audio>
+
+<script>
+  function start() {
+    let liczbaZestawow = parseInt(document.getElementById("liczbaZestawow").value);
+    let kontener = document.getElementById("kontener");
+    kontener.innerHTML = ""; // Czyścimy stare paski
+    kontener.style.display = "flex"; // Pokazujemy kontener z paskami
+    document.getElementById("menu").style.display = "none"; // Ukrywamy menu
+
+    let szerokoscEkranu = window.innerWidth;
+    let margines = 30;
+    let szerokoscZestawu = Math.min(200, szerokoscEkranu / liczbaZestawow - margines); // Ograniczamy szerokość
+
+    for (let i = 0; i < liczbaZestawow; i++) {
+      let zestaw = document.createElement("div");
+      zestaw.classList.add("zestaw");
+      zestaw.style.width = szerokoscZestawu + "px";
+      zestaw.style.left = (i * (szerokoscZestawu + margines)) + "px"; // Rozstawienie zestawów
+      zestaw.dataset.index = i;
+
+      for (let j = 0; j < 3; j++) {
+        let pasek = document.createElement("div");
+        pasek.classList.add("pasek");
+        pasek.onclick = function() { usunPasek(this); };
+        zestaw.appendChild(pasek);
+      }
+
+      zestaw.onmousedown = (e) => przesuwajZestaw(e, zestaw);
+
+      kontener.appendChild(zestaw);
+    }
+  }
+
+  function usunPasek(element) {
+    element.style.opacity = "0";
+    setTimeout(() => {
+      element.style.display = "none";
+
+      if (document.querySelectorAll(".pasek:not([style*='display: none'])").length === 0) {
+        document.getElementById("koncowyDzwiek").play();
+      }
+    }, 500);
+  }
+
+  function przejdzDoDzwiekow() {
+    window.location.href = "dzwieki.html";
+  }
+
+  function przesuwajZestaw(e, zestaw) {
+    e.preventDefault();
+    let startX = e.clientX;
+    let startLeft = parseInt(zestaw.style.left, 10);
+
+    function przesun(e) {
+      let nowaPozycja = startLeft + (e.clientX - startX);
+      zestaw.style.left = nowaPozycja + "px";
+    }
+
+    function zakonczPrzesuwanie() {
+      document.removeEventListener("mousemove", przesun);
+      document.removeEventListener("mouseup", zakonczPrzesuwanie);
+    }
+
+    document.addEventListener("mousemove", przesun);
+    document.addEventListener("mouseup", zakonczPrzesuwanie);
+  }
+</script>
+
+</body>
+</html>

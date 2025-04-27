@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odtwarzacz dźwięków</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    button {
+      padding: 15px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+    }
+    .prawidlowe { background-color: green; color: white; }
+    .nieprawidlowe { background-color: red; color: white; }
+    .czolowka { background-color: blue; color: white; }
+  </style>
+</head>
+<body>
+
+<h1>Wybierz dźwięk</h1>
+<button class="prawidlowe" onclick="odtworzDzwiek('poprawna.wav')">Prawidłowe</button>
+<button class="nieprawidlowe" onclick="odtworzDzwiek('zle.wav')">Nieprawidłowe</button>
+<button class="czolowka" onclick="odtworzDzwiek('czolowka.wav')">Czołówka</button>
+<button class="czolowka-dluszrza" onclick="odtworzDzwiek('czolowka-dluzsza.mp3')">Czołówka Dłuższa</button>
+
+<audio id="odtwarzacz"></audio>
+
+<script>
+  function odtworzDzwiek(nazwa) {
+    let odtwarzacz = document.getElementById("odtwarzacz");
+    odtwarzacz.src = "" + nazwa;
+    odtwarzacz.play();
+  }
+</script>
+
+
+</body>
+</html>

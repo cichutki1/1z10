@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moje BIO</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://files.oaiusercontent.com/file-Rd2MUPKJJjr4ya2XNBVBzs?se=2025-02-04T14%3A01%3A16Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D812b6c81-2201-412e-bf13-97ced9ed08aa.webp&sig=48Uj0rY/3m1BXJu1FcGZ43KulZYhmWeTK9iQRQiujRM%3D') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(5px);
+      color: #d0e7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .bio-container {
+      background-color: rgba(10, 20, 50, 0.85);
+      padding: 20px 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 50, 0.7);
+      max-width: 400px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .bio-container:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #1e90ff;
+      margin-bottom: 15px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      font-size: 28px;
+      margin: 10px 0;
+      color: #89cff0;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #1e90ff;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #87cefa;
+    }
+
+    .section {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: rgba(15, 30, 60, 0.9);
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .section:hover {
+      background-color: rgba(20, 40, 80, 0.9);
+    }
+  </style>
+</head>
+<body>
+<div class="bio-container">
+  <img src="https://cdn.discordapp.com/avatars/468729275705589762/00bb57d60926f3c3e62a853bad16e789.webp?size=1024&format=webp&width=640&height=640" alt="Zdjęcie profilowe" class="profile-pic">
+  <h1>Cichutki</h1>
+  <p>Programista pasjonujący się tworzeniem aplikacji w C# i C++. Lubię rozwijać swoje umiejętności i uczestniczyć w interesujących projektach.</p>
+
+  <div class="section">
+    <h2>Umiejętności</h2>
+    <p>C#, C++, HTML, CSS, JavaScript, SQL</p>
+  </div>
+
+  <div class="section">
+    <h2>Projekty</h2>
+    <p>Bezduszni - Server in SCP Secret Laboratory</p>
+  </div>
+
+  <div class="section">
+    <h2>Zainteresowania</h2>
+    <p>Informatyka, gry komputerowe, rozwój oprogramowania, matematyka.</p>
+  </div>
+
+  <div class="social-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Twitter</a>
+  </div>
+</div>
+</body>
+</html>

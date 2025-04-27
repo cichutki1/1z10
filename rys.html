@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odtwarzanie dźwięków</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            background-color: dodgerblue;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Wybierz dźwięk do odtworzenia</h1>
+<span>Wybierz jeden z poniższych dźwięków, aby go odtworzyć</span>
+<h2>Bond</h2>
+<audio controls>
+
+    <source src="dzwieki2/bond.mp3" type="audio/mpeg">
+</audio>
+
+<h2>Star Wars</h2>
+<audio controls>
+
+    <source src="dzwieki2/Star%20Wars.mp3" type="audio/mpeg">
+</audio>
+
+<h2>Piraci Z Karaibów</h2>
+<audio controls>
+
+    <source src="dzwieki2/piraci.mp3" type="audio/mpeg">
+</audio>
+
+<h2>The Final Countdown</h2>
+<audio controls>
+
+    <source src="dzwieki2/europe.mp3" type="audio/mpeg">
+</audio>
+
+<h2>Mission Impossible</h2>
+<audio controls>
+
+    <source src="dzwieki2/MIssion_Ipossible.mp3" type="audio/mpeg">
+</audio>
+
+<h2>Poranek</h2>
+<audio controls>
+
+    <source src="dzwieki2/poranek.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
